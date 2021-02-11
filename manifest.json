@@ -1,0 +1,36 @@
+{
+  "name": "Star",
+  "version": "0.0.0.1",
+  "description": "Star it if you like it!",
+  "permissions": ["activeTab", "storage", "tabs", "https://livefeed.cn/", "https://github.com/", "https://github.com/login/oauth/access_token"],
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "images/star.png",
+      "32": "images/star.png",
+      "48": "images/star.png",
+      "128": "images/star.png"
+    }
+  },
+  "icons": {
+      "16": "images/star.png",
+      "32": "images/star.png",
+      "48": "images/star.png",
+      "128": "images/star.png"
+  },
+  "manifest_version": 2,
+  "content_scripts": [
+    {
+      "matches": ["https://github.com/robots.txt*"],
+      "js": ["oauth2/oauth2_inject.js"],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "oauth2/oauth2.html"
+  ]
+}
