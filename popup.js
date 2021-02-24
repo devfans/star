@@ -1,0 +1,1 @@
+"use strict";function post(t){return x.post("https://livefeed.cn/manage/livebot",JSON.stringify(t),{text:!0})}
