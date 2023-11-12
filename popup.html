@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      body {
+        padding: 0;
+        background: rgb(42, 44, 47);
+        margin: 0;
+        width: 30em;
+        display: flex;
+        flex-direction: column;
+      }
+      button {
+        outline: none;
+        font-size: 1.1em;
+        padding: 0.1em 0.2em;
+        margin: 0.2em;
+        width: 5.2em;
+        height: 2.5em;
+        cursor: pointer;
+        border: solid 1px rgb(62, 64, 67);
+        border-radius: 3px;
+        background: rgb(42, 44, 47);
+        color: rgb(131, 177, 247);
+      }
+      #starpage {
+        flex-direction: column;
+        align-items: center;
+      }
+      .page-content {
+        width: 20em;
+        height: 20em;
+      }
+      #info {
+        display: flex;
+        justify-content: space-between;
+        background: rgb(41, 40, 47);
+        padding: 1em 1em;
+        padding-left: 2em;
+        border-bottom: 1px solid rgb(30, 30, 30);
+        height: 2.5em;
+      }
+      #info-signin-btn {
+        border-color: rgb(30, 30, 30);
+      }
+      .info-body {
+        display: flex;
+        flex-direction: row;
+      }
+      #avatar {
+        width: 3.5em;
+        height: 3.5em;
+        margin-top: -0.5em;
+      }
+      #avatar-img, #avatar-img-gh {
+        border-radius: 50% !important;
+        max-width: 100%;
+      }
+      #info-entry {
+        display: flex;
+        flex-direction: column;
+        margin-left: 1em;
+        justify-content: center;
+        color: rgb(232, 232, 252);
+      }
+      .info-btn-row {
+        height: 2.2em;
+      }
+      .info-btn-row button {
+        height: 100%;
+        justify-content: center;
+        text-align: center;
+        align-items: center;
+      }
+      #starit {
+        display: flex;
+        flex-direction:column;
+        align-items: center;
+      }
+      #starit .form-entry-value {
+        width: 18em;
+      }
+      #starit .form-entry-name {
+        color: rgb(131, 177, 247);
+      }
+      .page-btn-row {
+        display: flex;
+        align-self: flex-end;
+        margin-right: 2em;
+        padding-top: 2em;
+      }
+      form {
+        display: flex;
+        flex-direction: column;
+      }
+      button:hover {
+        border: none;
+        background: rgb(131, 177, 247);
+        color: black;
+      }
+      #save-btn, #page-save-btn {
+        border: solid 1px rgb(161, 207, 247);
+        background: rgb(131, 177, 247);
+        color: black;
+        margin-bottom: 2em;
+      }
+    </style>
+    <style>
+      .form-entry {
+        display: flex;
+        height: 2em;
+        margin-top: 1em;
+        width: 100%;
+      }
+      .form-text {
+        display: flex;
+        margin-top: 1em;
+        overflow: hidden;
+      }
+      .form-entry-name {
+        color: rgb(131, 177, 247);
+        font-weight: 400;
+        width: 5em;
+        font-size: 1.2em;
+        padding-top: 0.5em;
+      }
+      .form-entry-value, option, select {
+        background: rgb(32, 34, 37);
+        outline: none;
+        color: rgb(131, 177, 247);
+        -webkit-box-shadow: none;
+        border-style: none;
+        outline-style: none;
+        -webkit-appearance: none;
+        padding: 1em;
+        flex-grow: 1;
+      }
+      .btn-row {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 0.1em;
+      }
+      .search-btn-row {
+        padding: 0em 0.2em;
+      }
+      #search-btn {
+        margin: 0 0.2em;
+      }
+      #login-btn, #gh-login-btn {
+        margin-right: 2em;
+        margin-top: 1em;
+        margin-bottom: 1em;
+      }
+      #login {
+        display: flex;
+        flex-direction: column;
+      }
+      #login .form-entry {
+        justify-content: center;
+      }
+      #search-bar {
+        display: flex;
+        margin-top: 1.3em;
+        justify-content: center;
+      }
+      #search {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+      }
+      .search-row {
+        display: flex;
+        margin: 0.2em 1em;
+      }
+      #search-results {
+        display:flex;
+        flex-direction: column;
+        width: 100%;
+        margin-top: 1em;
+        max-height: 38em;
+        margin-bottom: 1em;
+        overflow-y: scroll;
+      }
+      #search-results::-webkit-scrollbar,  textarea::-webkit-scrollbar {
+        -webkit-appearance: none;
+        width: 0.1em;
+        background-color: rgb(22, 24, 27);
+      }
+      #search-results::-webkit-scrollbar-thumb,  textarea::-webkit-scrollbar-thumb  {
+        background-color: rgb(158, 158, 158);
+      }
+      .search-value, .search-type {
+        background: rgb(32, 34, 37);
+        outline: none;
+        color: rgb(131, 177, 247);
+        -webkit-box-shadow: none;
+        border-style: none;
+        outline-style: none;
+        -webkit-appearance: none;
+        padding: 0.1em;
+        padding-left: 0.8em;
+      }
+      .search-item {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+        width: 100%;
+        margin: 0;
+        word-wrap: nobreak;
+        height: 4em;
+        cursor: pointer;
+      }
+      .search-item:hover {
+        background: rgb(22, 24, 27);
+      }
+      .item-body {
+        display: flex;
+        margin: 0 1.8em;
+        padding: 0.4em 0;
+        flex-direction: row;
+        justify-content: space-between;
+        border-top: solid 1px rgb(60, 71, 72);
+        width: 100%;
+        overflow: hidden;
+      }
+      .item-mark {
+        justify-content: space-between;
+        flex-direction: column;
+        text-align: center;
+        font-size: 10px;
+        display: flex;
+        align-items: flex-end;
+      }
+      .item-tags {
+        display: flex;
+        flex-direction: row;
+      }
+      .item-tag {
+        padding: 2px 6px;
+        border-radius: 1px;
+        margin-left: 1px;
+        background: rgb(131, 177, 247);
+        color: black;
+      }
+      .item-cate {
+        background: rgb(63, 67, 74);
+        border-radius: 1px;
+        color: silver;
+        padding: 2px 6px;
+      }
+      .item-entry {
+        width: 10%;
+        margin-top: 0.2em;
+      }
+      .item-name {
+        color: rgb(131, 177, 247);
+        font-size: 1.2em;
+        display: inline;
+        white-space: nowrap;
+      }
+      .item-value {
+        font-size: 0.8em;
+        color: silver;
+        width: 28em;
+        overflow: hidden;
+        white-space: nowrap;
+      }
+      .item-btn {
+        display: none;
+      }
+      #info-email {
+        color: rgb(150, 148, 148);
+        font-size: 0.9em;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="info">
+      <div class="info-body">
+        <div id="avatar">
+          <img id="avatar-img" />
+          <svg id="avatar-img-gh" viewBox="0 0 16 16" version="1.1" width="42" aria-hidden="true"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>
+        </div>
+        <div id="info-entry">
+          <div id="info-user"></div>
+          <div id="info-email"></div>
+        </div>
+      </div>
+      <div class="info-btn-row">
+        <button id="info-signin-btn">Sign in</button>
+        <button id="info-signout-btn" style="display:none">Sign out</button>
+      </div>
+    </div>
+ 
+    <div id="login" style="display:none">
+     <form action="/auth/login" method="post">
+       <div class="form-entry">
+         <div class="form-entry-name"> Account </div>
+         <input class="form-entry-value" spellcheck="false" name="account" type="text" required=true placeholder="Email/Username" />
+       </div>
+       <div class="form-entry">
+         <div class="form-entry-name"> Password </div>
+         <input class="form-entry-value" name="password" type="password" required=true placeholder="Passowrd" />
+       </div>
+     </form>
+     <div class="btn-row">
+      <button id="login-btn">Login</button>
+      <button id="gh-login-btn">Github</button>
+     </div>
+    </div>
+    <div id="search">
+      <div id="search-bar">
+        <div class="search-row">
+          <input type="search" autocomplete="false" class="search-value" spellcheck="false" name="search-key" placeholder="Search" />
+          <select class="search-type" name="search-type">
+            <option value="keyword">Keyword</option>
+            <option value="name">Name</option>
+            <option value="category">Category</option>
+            <option value="tag">Tag</option>
+          </select>
+          <div class="btn-row search-btn-row">
+            <button id="search-btn">Add</button>
+          </div>
+        </div>
+      </div>
+      <div id="search-results">
+      </div>
+      <div style="display:none">
+        <div class="search-item" id="tpl-item">
+          <div class="item-body">
+            <div class="item-entry">
+              <div class="item-name"></div>
+              <div class="item-value"></div>
+            </div>
+            <div class="item-mark">
+              <div class="item-cate"></div>
+              <div class="item-tags">
+              </div>
+            </div>
+          </div>
+          <div class="item-btn">o</div>
+        </div>
+        <div class="item-tag" id="tpl-tag"></div>
+      </div>
+    </div>
+    <!--
+    <button id="translate-btn">translate</button>
+    <button id="options-btn">Options</button>
+    <button id="fetch-btn-try">_fetch</button>
+    -->
+    <div id="starit">
+      <form action="/auth/starit" method="post">
+        <div class="form-entry">
+          <input class="form-entry-value" spellcheck="false" name="page_name" type="text" required=true placeholder="Name" />
+        </div>
+        <div class="form-entry">
+          <input class="form-entry-value" name="link" spellcheck="false" type="text" required=true placeholder="Link" />
+        </div>
+        <div class="form-entry">
+          <input class="form-entry-value" name="category" spellcheck="false" type="text" required=true placeholder="Category" />
+        </div>
+        <div class="form-entry">
+          <input class="form-entry-value" name="tags" spellcheck="false" type="text" required=true placeholder="TagsA,TagsB" />
+        </div>
+      </form>
+      <div class="btn-row page-btn-row">
+        <button id="cancel-btn">Cancel</button>
+        <button id="note-btn">Note</button>
+        <button id="save-btn">Save</button>
+      </div>
+    </div>
+    <div id="starpage" >
+      <form action="/auth/starpage" method="post">
+        <div class="form-entry">
+          <div class="form-entry-name"> Name </div>
+          <input class="form-entry-value" spellcheck="false" name="page_title" type="text" required=true placeholder="Name" />
+        </div>
+        <div class="form-entry">
+          <div class="form-entry-name"> Category </div>
+          <input class="form-entry-value" name="page_category" spellcheck="false" type="text" required=true placeholder="Category" />
+        </div>
+        <div class="form-entry">
+          <div class="form-entry-name"> Tags </div>
+          <input class="form-entry-value" name="page_tags" spellcheck="false" type="text" required=true placeholder="TagsA,TagsB" />
+        </div>
+        <div class="form-text">
+          <textarea class="form-entry-value page-content" name="page_content" spellcheck="false" type="text" required=true placeholder="Content" > </textarea>
+        </div>
+      </form>
+      <div class="btn-row page-btn-row">
+        <button id="page-cancel-btn">Cancel</button>
+        <button id="page-save-btn">Save</button>
+      </div>
+    </div>
+    <script src="oauth2/oauth2.js"></script>
+    <script src="maester.js"></script>
+  </body>
+</html>
