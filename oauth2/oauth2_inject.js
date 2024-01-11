@@ -1,0 +1,1 @@
+var url=window.location.href,params="?",index=url.indexOf(params),redirect=(-1<index&&(params=url.substring(index)),params+="&from="+encodeURIComponent(url),chrome.runtime.getURL("oauth2/oauth2.html"));window.location=redirect+params;

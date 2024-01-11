@@ -1,0 +1,1 @@
+OAuth2.adapter("sample",{authorizationCodeURL:function(e){return""},redirectURL:function(e){return""},parseAuthorizationCode:function(e){return""},accessTokenURL:function(){return""},accessTokenMethod:function(){return"POST"},accessTokenParams:function(e,n){return{}},parseAccessToken:function(e){return{accessToken:"",refreshToken:"",expiresIn:Number.MAX_VALUE}}});
