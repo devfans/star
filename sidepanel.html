@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      html {
+        height: 100%;
+      }
+      body {
+        padding: 0;
+        background: rgb(42, 44, 47);
+        margin: 0;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+      button {
+        outline: none;
+        font-size: 1.1em;
+        padding: 0.1em 0.2em;
+        margin: 0.2em;
+        width: 5.2em;
+        font-style: italic;
+        height: 2.5em;
+        cursor: pointer;
+        border: none;
+        border-bottom: solid 1px rgb(62, 64, 67);
+        border-radius: 3px;
+        background: rgb(42, 44, 47);
+        color: rgb(131, 177, 247);
+      }
+      #starpage {
+        flex-direction: column;
+        align-items: center;
+        flex-grow: 1;
+      }
+      .page-content {
+        flex-grow: 1;
+      }
+      .info-bar {
+        display: flex;
+        justify-content: space-between;
+        background: rgb(41, 40, 47);
+        padding: 1em 1em;
+        padding-left: 2em;
+        border-bottom: 1px solid rgb(30, 30, 30);
+        height: 2.5em;
+      }
+      .info-signin-btn {
+        border-color: rgb(30, 30, 30);
+      }
+      .info-body {
+        display: flex;
+        flex-direction: row;
+      }
+      .avatar {
+        width: 3.5em;
+        height: 3.5em;
+        margin-top: -0.5em;
+        display: flex;
+      }
+      .avatar-img {
+        border-radius: 50% !important;
+        max-width: 100%;
+      }
+      .info-entry {
+        display: flex;
+        flex-direction: column;
+        margin-left: 1em;
+        justify-content: center;
+        color: rgb(232, 232, 252);
+      }
+      .info-btn-row {
+        height: 2.2em;
+      }
+      .info-btn-row button {
+        height: 100%;
+        justify-content: center;
+        background: none;
+        text-align: center;
+        align-items: center;
+      }
+      #starit {
+        display: flex;
+        flex-direction:column;
+        align-items: center;
+      }
+      #starit .form-entry-value {
+        width: 100%;
+      }
+      #starit .form-entry-name {
+        color: rgb(131, 177, 247);
+      }
+      #starpage .form-text {
+        flex-grow: 1;
+      }
+      #starpage .form-entry {
+        height: 1.5em;
+      }
+      #starpage .form-entry-value {
+        width: 100%;
+      }
+      #starpage .form-entry-name {
+        color: rgb(150, 148, 148);
+        font-size: 1em;
+      }
+      .page-btn-row {
+        display: flex;
+        align-self: flex-end;
+        margin-right: 2em;
+        padding-top: 1em;
+      }
+      form {
+        display: flex;
+        flex-direction: column;
+        width: 80%;
+      }
+      #starpage form {
+        width: 90%;
+        flex-grow: 1;
+      }
+      button:hover {
+        border: none;
+        background: rgb(131, 177, 247);
+        color: black;
+      }
+      #save-btn, #page-save-btn {
+        border: solid 1px rgb(161, 207, 247);
+        background: rgb(131, 177, 247);
+        color: black;
+        margin-bottom: 2em;
+      }
+    </style>
+    <style>
+      .form-entry {
+        display: flex;
+        height: 3em;
+        margin-top: 1em;
+      }
+
+      .form-text {
+        display: flex;
+        margin-top: 1em;
+        overflow: hidden;
+      }
+      .form-entry-name {
+        color: rgb(131, 177, 247);
+        font-weight: 400;
+        min-width: 4em;
+        font-style: italic;
+        font-size: 1.2em;
+        padding-top: 0.5em;
+      }
+      .form-entry-value, option, select {
+        background: rgb(39 42 46);
+        outline: none;
+        color: rgb(131, 177, 247);
+        -webkit-box-shadow: none;
+        border-style: none;
+        outline-style: none;
+        -webkit-appearance: none;
+        padding: 1em;
+      }
+      input.form-entry-value {
+        background: none;
+        border-bottom: solid 1px rgb(62, 64, 67);
+        font-style: italic;
+        margin: 0 1em;
+      }
+      #starpage textarea {
+        margin-top: 1em;
+      }
+      .btn-row {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 0.1em;
+      }
+      .search-btn-row {
+        padding: 0em 0.2em;
+      }
+      #search-btn {
+        width: 3.6em;
+        margin-left: 0.2em;
+      }
+      #login-btn, #gh-login-btn {
+        margin-right: 2em;
+        margin-top: 1em;
+        margin-bottom: 1em;
+      }
+      #login {
+        display: flex;
+        flex-direction: column;
+      }
+      #login .form-entry {
+        justify-content: center;
+      }
+      #search-bar {
+        display: flex;
+        margin-top: 1.3em;
+        justify-content: center;
+      }
+      #search {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        overflow: hidden;
+      }
+      .search-row {
+        display: flex;
+        margin: 0.2em 1em;
+      }
+      @-webkit-keyframes slideIn {
+        0% {
+          transform: translateX(60px);
+        }
+        100% {
+          transform: translateX(0);
+        }
+      }
+      @-moz-keyframes slideIn {
+        0% {
+          transform: translateX(60px);
+        }
+        100% {
+          transform: translateX(0);
+        }
+      }
+      @keyframes slideIn {
+        0% {
+          transform: translateX(60px);
+        }
+        100% {
+          transform: translateX(0);
+        }
+      }
+      #search-results {
+        display:flex;
+        flex-direction: column;
+        width: 100%;
+        margin-bottom: 1em;
+        overflow-y: scroll;
+        -webkit-animation: slideIn 1.5s forwards;
+        -moz-animation: slideIn 1.5s forwards;
+        animation: slideIn 1.5s forwards;
+      }
+      #search-results::-webkit-scrollbar,  textarea::-webkit-scrollbar{
+        -webkit-appearance: none;
+        width: 0.1em;
+        background-color: rgb(53, 53, 53);
+      }
+      textarea {
+        display: flex;
+      }
+      #search-results::-webkit-scrollbar-thumb,  textarea::-webkit-scrollbar-thumb {
+        background-color: rgb(158, 158, 158);
+      }
+      .search-type {
+        border-left: solid 2px rgb(63, 74, 92);
+      }
+      .search-value {
+        border-style: none; 
+      }
+      .search-value, .search-type {
+        background: rgb(32, 34, 37);
+        outline: none;
+        color: rgb(131, 177, 247);
+        -webkit-box-shadow: none;
+        outline-style: none;
+        -webkit-appearance: none;
+        padding: 0.1em;
+        padding-left: 0.8em;
+        font-style: italic;
+      }
+      .search-item {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+        width: 100%;
+        margin: 0;
+        word-wrap: nobreak;
+        height: 4em;
+        cursor: pointer;
+      }
+      .search-item:hover {
+        background: rgb(22, 24, 27);
+      }
+      .item-body {
+        display: flex;
+        margin: 0 1.8em;
+        padding: 0.4em 0;
+        flex-direction: row;
+        justify-content: space-between;
+        border-top: solid 1px rgb(60, 71, 72);
+        width: 100%;
+        overflow: hidden;
+      }
+      .item-mark {
+        justify-content: space-between;
+        flex-direction: column;
+        text-align: center;
+        font-size: 10px;
+        display: flex;
+        align-items: flex-end;
+      }
+      .item-tags {
+        display: flex;
+        flex-direction: row;
+      }
+      .item-tag {
+        padding: 2px 6px;
+        border-radius: 1px;
+        margin-left: 1px;
+        background: rgb(131, 177, 247);
+        color: black;
+      }
+      .item-cate {
+        background: rgb(63, 67, 74);
+        border-radius: 1px;
+        color: silver;
+        padding: 2px 6px;
+      }
+      .item-entry {
+        width: 10%;
+        margin-top: 0.2em;
+      }
+      .item-name {
+        color: rgb(131, 177, 247);
+        font-size: 1.2em;
+        display: inline;
+        white-space: nowrap;
+      }
+      .item-value {
+        font-size: 0.8em;
+        color: silver;
+        width: 28em;
+        overflow: hidden;
+        white-space: nowrap;
+      }
+      .item-btn {
+        display: none;
+      }
+      .info-email {
+        color: rgb(150, 148, 148);
+        font-size: 0.9em;
+      }
+
+      #loader, #save-loader, #save-page-loader {
+        height: 0.5em;
+        align-self: center;
+        width: 20em;
+        max-width: 60%;
+        margin: 0.3em;
+     }
+
+      /* HTML: <div class="loader"></div> */
+    .loader {
+      color: rgb(131, 177, 247);
+      position: relative;
+    }
+    .loader::before {
+      content: "";
+      position: absolute;
+      margin: 2px;
+      width: 25%;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      border-radius: inherit;
+      background: currentColor;
+      animation: l3 1s infinite linear;
+    }
+    @keyframes l3 {
+        50% {left:100%;transform: translateX(calc(-100% - 4px))}
+    }
+    </style>
+  </head>
+  <body>
+    <div id="info" class="info-bar">
+      <div class="info-body">
+        <div id="avatar" class="avatar">
+          <img id="avatar-img" class="avatar-img" />
+          <svg id="avatar-img-gg" version="1.1" class="avatar-img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"  width="30" height="30" xmlns:xlink="http://www.w3.org/1999/xlink" style="display: none; align-self: center">
+            <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"></path>
+            <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"></path>
+            <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"></path>
+            <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"></path>
+            <path fill="none" d="M0 0h48v48H0z"></path>
+          </svg>
+          <svg id="avatar-img-gh" class="avatar-img" viewBox="0 0 16 16" width="32" height="32" version="1.1" aria-hidden="true" style="align-self:center"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>
+        </div>
+        <div id="info-entry" class="info-entry">
+          <div id="info-user" class="info-user"></div>
+          <div id="info-email" class="info-email"></div>
+        </div>
+      </div>
+      <div class="info-btn-row">
+        <button id="info-signin-btn" class="info-signin-btn">Sign in</button>
+        <button id="info-signout-btn" class="info-signin-btn" style="display:none">Sign out</button>
+      </div>
+    </div>
+
+    <div id="info-google" class="info-bar">
+      <div class="info-body">
+        <div class="avatar" >
+          <svg version="1.1" class="avatar-img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"  width="30" height="30" xmlns:xlink="http://www.w3.org/1999/xlink" style="display: block; align-self: center">
+            <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"></path>
+            <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"></path>
+            <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"></path>
+            <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"></path>
+            <path fill="none" d="M0 0h48v48H0z"></path>
+          </svg>
+        </div>
+        <div class="info-entry">
+          <div class="info-user">Sign in with Google Account</div>
+          <div class="info-email">Please sign in first.</div>
+        </div>
+      </div>
+      <div class="info-btn-row">
+        <button id="info-signin-btn-google" class="info-signin-btn">Sign in</button>
+      </div>
+    </div>
+ 
+    <div id="login" style="display:none">
+     <form action="/auth/login" method="post">
+       <div class="form-entry">
+         <div class="form-entry-name"> Account </div>
+         <input class="form-entry-value" spellcheck="false" name="account" type="text" required=true placeholder="Email/Username" />
+       </div>
+       <div class="form-entry">
+         <div class="form-entry-name"> Password </div>
+         <input class="form-entry-value" name="password" type="password" required=true placeholder="Passowrd" />
+       </div>
+     </form>
+     <div class="btn-row">
+      <button id="login-btn">Login</button>
+      <button id="gh-login-btn">Github</button>
+     </div>
+    </div>
+    <div id="search">
+      <div id="search-bar">
+        <div class="search-row">
+          <select class="search-type" name="search-type">
+            <option value="keyword">Keyword</option>
+            <option value="name">Name</option>
+            <option value="category">Category</option>
+            <option value="tag">Tag</option>
+          </select>
+          <input type="search" autocomplete="false" class="search-value" spellcheck="false" name="search-key" placeholder="Search" />
+          <div class="btn-row search-btn-row">
+            <button id="search-btn">Add</button>
+          </div>
+        </div>
+      </div>
+      <div id="loader" class="loader"></div>
+      <div id="search-results">
+      </div>
+      <div style="display:none">
+        <div class="search-item" id="tpl-item">
+          <div class="item-body">
+            <div class="item-entry">
+              <div class="item-name"></div>
+              <div class="item-value"></div>
+            </div>
+            <div class="item-mark">
+              <div class="item-cate"></div>
+              <div class="item-tags">
+              </div>
+            </div>
+          </div>
+          <div class="item-btn">o</div>
+        </div>
+        <div class="item-tag" id="tpl-tag"></div>
+      </div>
+    </div>
+    <!--
+    <button id="translate-btn">translate</button>
+    <button id="options-btn">Options</button>
+    <button id="fetch-btn-try">_fetch</button>
+    -->
+    <div id="starit">
+      <form action="/auth/starit" method="post">
+        <div class="form-entry">
+          <input class="form-entry-value" spellcheck="false" name="page_name" type="text" required=true placeholder="Name" />
+        </div>
+        <div class="form-entry">
+          <input class="form-entry-value" name="link" spellcheck="false" type="text" required=true placeholder="Link" />
+        </div>
+        <div class="form-entry">
+          <input class="form-entry-value" name="category" spellcheck="false" type="text" required=true placeholder="Category" />
+        </div>
+        <div class="form-entry">
+          <input class="form-entry-value" name="tags" spellcheck="false" type="text" required=true placeholder="TagA,TagB" />
+        </div>
+      </form>
+      <div id="save-loader" class="loader"></div>
+      <div class="btn-row page-btn-row">
+        <button id="cancel-btn">Cancel</button>
+        <button id="note-btn">Note</button>
+        <button id="save-btn">Save</button>
+      </div>
+    </div>
+    <div id="starpage" >
+      <form action="/auth/starpage" method="post">
+        <div class="form-entry">
+          <div class="form-entry-name"> Name </div>
+          <input class="form-entry-value" spellcheck="false" name="page_title" type="text" required=true placeholder="name" />
+          <div class="form-entry-name"> Category </div>
+          <input class="form-entry-value" name="page_category" spellcheck="false" type="text" required=true placeholder="category" />
+        </div>
+        <div class="form-entry">
+          <div class="form-entry-name"> Tags </div>
+          <input class="form-entry-value" name="page_tags" spellcheck="false" type="text" required=true placeholder="tagA,tagB" />
+        </div>
+        <div class="form-text">
+          <textarea class="form-entry-value page-content" name="page_content" spellcheck="false" type="text" required=true placeholder="Content" > </textarea>
+        </div>
+      </form>
+      <div id="save-page-loader" class="loader"></div>
+      <div class="btn-row page-btn-row">
+        <button id="page-cancel-btn">Cancel</button>
+        <button id="page-save-btn">Save</button>
+      </div>
+    </div>
+    <script src="oauth2/oauth2.js"></script>
+    <script src="maester.js"></script>
+  </body>
+</html>

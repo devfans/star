@@ -1,0 +1,1 @@
+var url=decodeURIComponent(window.location.href.match(/&from=([^&]+)/)[1]),index=url.indexOf("?"),adapterName=(-1<index&&(url=url.substring(0,index)),OAuth2.lookupAdapterName(url)),finisher=new OAuth2(adapterName,OAuth2.FINISH);
