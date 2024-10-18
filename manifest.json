@@ -1,0 +1,47 @@
+{
+  "name": "Star",
+  "version": "0.0.1.2",
+  "description": "Star it if you like it! A pretty handy bookmark manager!",
+  "permissions": ["storage", "tabs", "activeTab", "sidePanel" ],
+  "host_permissions": [ "https://livefeed.cn/", "https://github.com/", "https://github.com/login/oauth/access_token", "https://www.google.com/"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_icon": {
+      "16": "images/star.png",
+      "24": "images/star.png",
+      "32": "images/star.png"
+    },
+    "default_title": "Star",
+    "default_popup": "popup.html"
+  },
+  "side_panel": {
+    "default_path": "sidepanel.html"
+  },
+  "icons": {
+      "16": "images/star.png",
+      "32": "images/star.png",
+      "48": "images/star.png",
+      "128": "images/star.png"
+  },
+  "manifest_version": 3,
+  "content_scripts": [
+    {
+      "matches": ["https://github.com/robots.txt*", "https://www.google.com/robots.txt*"],
+      "js": ["oauth2/oauth2_inject.js"],
+      "run_at": "document_start"
+    }
+  ],
+  "minimum_chrome_version": "114",
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "oauth2/oauth2.html"
+      ],
+      "matches": [
+        "*://*/*"
+      ]
+    }
+  ]
+}
